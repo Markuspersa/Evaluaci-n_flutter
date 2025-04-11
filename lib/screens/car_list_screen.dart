@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/car_service.dart';
+import 'package:flutter_application_1/screens/qr_scanner_screen.dart';
+
+
 
 class CarListScreen extends StatefulWidget {
   @override
@@ -7,7 +10,9 @@ class CarListScreen extends StatefulWidget {
 }
 
 class _CarListScreenState extends State<CarListScreen> {
+  
   List<dynamic> _cars = [];
+  
 
   @override
   void initState() {
@@ -23,20 +28,44 @@ class _CarListScreenState extends State<CarListScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Mis Carros")),
-      body: ListView.builder(
-        itemCount: _cars.length,
-        itemBuilder: (context, index) {
-          final car = _cars[index];
-          return ListTile(
-            leading: Icon(Icons.electric_car, size: 40, color: Colors.blue),
-            title: Text("Placa: ${car['placa']}"),
-            subtitle: Text("Conductor: ${car['conductor']}"),
-          );
-        },
-      ),
-    );
-  }
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(title: const Text("Mis Carros")),
+    body: Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: _cars.length,
+            itemBuilder: (context, index) {
+              final car = _cars[index];
+              return ListTile(
+                leading: Icon(Icons.electric_car, size: 40, color: Colors.blue),
+                title: Text("Placa: ${car['placa']}"),
+                subtitle: Text("Conductor: ${car['conductor']}"),
+              );
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => QRScannerScreen()),
+                  );
+                },
+                icon: Icon(Icons.qr_code_scanner),
+                label: Text('Escanear QR'),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }

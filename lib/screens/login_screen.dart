@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/qr_scanner_screen.dart';
 import 'package:flutter_application_1/services/login_service.dart';
 import 'package:flutter_application_1/screens/car_list_screen.dart';
 
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   if (success) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => CarListScreen()),
+      MaterialPageRoute(builder: (context) => QRScannerScreen()),
     );
   } else {
     ScaffoldMessenger.of(context).showSnackBar(
