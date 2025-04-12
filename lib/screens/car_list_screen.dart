@@ -27,7 +27,7 @@ class _CarListScreenState extends State<CarListScreen> {
     });
   }
 
-  @override
+@override
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(title: const Text("Mis Carros")),
@@ -39,7 +39,12 @@ Widget build(BuildContext context) {
             itemBuilder: (context, index) {
               final car = _cars[index];
               return ListTile(
-                leading: Icon(Icons.electric_car, size: 40, color: Colors.blue),
+                leading: Image.network(
+                  car["imagen"],
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
                 title: Text("Placa: ${car['placa']}"),
                 subtitle: Text("Conductor: ${car['conductor']}"),
               );

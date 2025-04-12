@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/car_list_screen.dart';
+import 'package:flutter_application_1/services/car_service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -39,6 +41,14 @@ class _CarConfirmationScreenState extends State<CarConfirmationScreen> {
     }
   }
 
+  Future<void> save() async {
+    await CarService.saveCar(carData!);
+    Navigator.pushReplacement(
+      context, 
+      MaterialPageRoute(builder: (context) => CarListScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +83,7 @@ class _CarConfirmationScreenState extends State<CarConfirmationScreen> {
                               style: TextStyle(fontSize: 18)),
                           const SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: save,
                             child: const Text('Agregar'),
                           )
                         ],
